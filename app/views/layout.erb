@@ -15,15 +15,13 @@
 
     <div class="brand"><a href="/">User Authentication</a></div>
 
-    <ul>
-      <!-- TODO: Implement Sign_Out. Render a delete form in a partial if there is a current user -->
+    <ul>  
+        <% if session["user"] %>
+          <%= erb :log_out %>
+        <% end %>
         <li><a href="/sessions/new">Sign In</a></li>
         <li><a href="/users/new">Sign Up</a></li>
       </ul>
-    <form method="post" action="/kill">
-      <input type="hidden" id="">
-      <input type="submit" value="Logout">
-    </form>
   </nav>
 
   <%= yield %>

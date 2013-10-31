@@ -18,13 +18,9 @@ post '/sessions' do
   redirect '/'
 end
 
-post '/kill' do
-  session["user"] = nil
-end
-
 delete '/sessions/:id' do
-
-  # sign-out  - use a partial with a form (no AJAX)
+  session["user"] = nil
+  redirect '/'
 end
 
 #----------- USERS -----------
