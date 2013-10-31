@@ -4,7 +4,7 @@ get '/' do
   # render home page
  #TODO: Show all users if user is signed in
   # @user_id = session[:user_id]
-  @users = User.all
+    @users = User.all
     erb :index
 end
 
@@ -21,6 +21,7 @@ post '/sessions' do
 
   if !u.nil? && params[:user][:password] == u.password
     session[:user_id] = u.id
+    p session
     redirect '/'
   else
     'get the fuck out of here, dude'
