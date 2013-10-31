@@ -37,8 +37,9 @@ get '/users/new' do
 end
 
 post '/users' do
-# p params
-# p params.fetch("user")
+User.create(name: params.fetch("user").fetch("name"),
+            email: params.fetch("user").fetch("email"), 
+            password: params.fetch("user").fetch("password") )
 p session[:name] = params.fetch("user").fetch("name")
 p session[:name]
 # p "Nothing to see here"
