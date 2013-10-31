@@ -32,6 +32,9 @@ get '/users/new' do
 end
 
 post '/users' do
-
+  user = User.create params[:user]
+  session[:user_id] = user.id
   # sign-up a new user
+  "welcome new user: #{user.name}!"
 end
+
