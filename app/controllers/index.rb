@@ -7,7 +7,7 @@ end
 #----------- SESSIONS -----------
 
 get '/sessions/new' do
-  # render sign-in page 
+  # render sign-in page
   erb :sign_in
 end
 
@@ -32,6 +32,12 @@ get '/users/new' do
 end
 
 post '/users' do
-
+  @name = params["user"]["name"]
+  @email= params["user"]["email"]
+  @password = params["user"]["password"]
+  @new_user = User.create(:name => @name, :email => @email, :password => @password)
+  session[:user_id] = @new_user.id
+  p session
+  redirect '/sessions/new'
   # sign-up a new user
 end
