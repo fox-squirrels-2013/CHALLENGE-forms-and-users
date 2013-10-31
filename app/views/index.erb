@@ -5,7 +5,11 @@
   2. If user is signed in then  display all users %>
 
   <% if current_user %>
-      here's a list of users!
+      here's a list of users!<br>
+      <br>
+      <ul>
+        <li><%= @users.map(&:name).join("\n<li>") %>    
+      </ul>
   <% else %>
       welcome!
   <% end %>
