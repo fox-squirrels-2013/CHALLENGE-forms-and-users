@@ -1,19 +1,30 @@
+enable :sessions
+
 get '/' do
   # render home page
  #TODO: Show all users if user is signed in
-  erb :index
+  # @user_id = session[:user_id]
+  @users = User.all
+    erb :index
 end
 
 #----------- SESSIONS -----------
 
 get '/sessions/new' do
+  # sessions[:user_id] = params
   # render sign-in page 
   erb :sign_in
 end
 
 post '/sessions' do
+  u = User.where('email = ?', params[:user][:email]).first
 
-  # sign-in
+  if !u.nil? && params[:user][:password] == u.password
+    session[:user_id] = u.id
+    redirect '/'
+  else
+    'get the fuck out of here, dude'
+  end
 end
 
 
@@ -32,6 +43,7 @@ get '/users/new' do
 end
 
 post '/users' do
-
-  # sign-up a new user
+  u = User.create(params[:user])
+  session[:user_id] = u.id
+  redirect '/'
 end

@@ -3,4 +3,9 @@
   <%# TODO: 
   1. If user is not signed in - display "Welcome".
   2. If user is signed in then  display all users %>
+  <p>Welcome</p>
+  <% unless current_user.nil? %>
+  <%= current_user.name %>
+
+  <% end %>
 </div>
