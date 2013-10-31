@@ -1,7 +1,10 @@
+require './config/environment.rb'
+
+
 get '/' do
   # render home page
  #TODO: Show all users if user is signed in
-  erb :index
+ erb :index
 end
 
 #----------- SESSIONS -----------
@@ -12,8 +15,12 @@ get '/sessions/new' do
 end
 
 post '/sessions' do
-
-  # sign-in
+  if User.find_by_email(params[:user][:email]).password == params[:user][:password]
+    session[:user] = User.find_by_email(params[:user][:email]).id
+    erb :list
+  else
+    erb :not_a_user
+  end
 end
 
 
@@ -32,6 +39,9 @@ get '/users/new' do
 end
 
 post '/users' do
-
-  # sign-up a new user
+  p '9'*80
+  p params
+  User.create!(params[:user])
+  # p @user_list = User.all  
+  erb :sign_in
 end
