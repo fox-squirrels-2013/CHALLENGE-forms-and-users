@@ -3,4 +3,18 @@
   <%# TODO: 
   1. If user is not signed in - display "Welcome".
   2. If user is signed in then  display all users %>
+  <p>Welcome</p>
+
+<% unless current_user.nil? %>
+    <%= current_user.name %>
+    <p>Below are you fellow dudes</p>
+    
+    <% @users.each do |user| %>
+      <p> <%= user.name %> </p>
+    <% end %>
+  
+    <a href="<% session.clear %> /">Sign Out</a>    
+    
+    <% end %>
+
 </div>
