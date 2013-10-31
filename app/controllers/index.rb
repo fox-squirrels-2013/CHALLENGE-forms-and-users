@@ -19,9 +19,13 @@ get '/sessions/new' do
 end
 
 post '/sessions' do
-  @user = User.find_by email: params["user"]["email"]
-
-
+  if User.exists? email: params["user"]["email"]
+    @user = User.where(email: params["user"]["email"]).first
+    if @user.password == params["user"]["password"]
+      session[:user_id] = @user.id
+    end
+  end
+  redirect '/'
 end
 
 
