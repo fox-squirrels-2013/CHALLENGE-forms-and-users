@@ -1,4 +1,9 @@
+set(:sess) do |role|
+  condition 
+end
+
 get '/' do
+  session["user"] ||= nil
   # render home page
  #TODO: Show all users if user is signed in
   erb :index
@@ -32,6 +37,16 @@ get '/users/new' do
 end
 
 post '/users' do
-
+# p params
+# p params.fetch("user")
+p session[:name] = params.fetch("user").fetch("name")
+p session[:name]
+# p "Nothing to see here"
   # sign-up a new user
+    # erb :index
+    erb :users
+end
+
+get '/session' do
+  erb :sessions
 end
