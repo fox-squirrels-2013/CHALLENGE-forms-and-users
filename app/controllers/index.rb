@@ -12,10 +12,18 @@ get '/sessions/new' do
 end
 
 post '/sessions' do
-
-  # sign-in
+  user = get_user_from(params[:user])
+  
+  if user
+    if user_is_authenticated(params[:user])
+      redirect '/'
+    else
+      # bad password path
+    end
+  else
+    # user not found path
+  end
 end
-
 
 
 delete '/sessions/:id' do
@@ -32,6 +40,9 @@ get '/users/new' do
 end
 
 post '/users' do
-
+  user = create_user_from(params[:user])
   # sign-up a new user
+  "welcome new user: #{current_user.name}!"
 end
+
+#"session_id"=>"ddf63b23656765c4b093f5550200723bedd62e0157dec895ecc3d2a46199a08a", "tracking"=>{"HTTP_USER_AGENT"=>"98165fd680503272a3708d21632722a1dbff40ca", "HTTP_ACCEPT_ENCODING"=>"ed2b3ca90a4e723402367a1d17c8b28392842398", "HTTP_ACCEPT_LANGUAGE"=>"66eae971492938c2dcc2fb1ddc8d7ec3196037da"}, "csrf"=>"a30b950d40834cb3e5469ecda494b9c9b61413cbb79880fa0698cd088b03767c", "user_id"=>1}
