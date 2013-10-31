@@ -4,6 +4,8 @@ require './config/environment.rb'
 get '/' do
   # render home page
  #TODO: Show all users if user is signed in
+ @all_users = User.all
+ p @all_users
  erb :index
 end
 

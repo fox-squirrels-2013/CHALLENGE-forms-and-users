@@ -3,4 +3,12 @@
   <%# TODO: 
   1. If user is not signed in - display "Welcome".
   2. If user is signed in then  display all users %>
-</div>
+  <% if session[:user] %>
+  <% @all_users.each do |user| %>
+  <%= user.name %>
+  <br>
+  <% end %>
+  <% else %>
+  <h1>Welcome!<h1>
+    <% end %>
+  </div>
