@@ -1,22 +1,26 @@
 get '/' do
-  # render home page
- #TODO: Show all users if user is signed in
+  session["user"] ||= nil
+  @all_members = User.all
   erb :index
 end
 
 #----------- SESSIONS -----------
 
 get '/sessions/new' do
-  # render sign-in page 
+
   erb :sign_in
 end
 
 post '/sessions' do
 
-  # sign-in
+  @logged_in_user = User.where(email: params[:user][:email], password: params[:user][:password]) 
+  session["user"] = @logged_in_user[0][:id]
+  redirect '/'
 end
 
-
+post '/kill' do
+  session["user"] = nil
+end
 
 delete '/sessions/:id' do
 
@@ -27,11 +31,13 @@ end
 
 get '/users/new' do
 
-  # render sign-up page
+  
   erb :sign_up
 end
 
 post '/users' do
-
-  # sign-up a new user
+  User.create(name: params[:user][:name], email: params[:user][:email], password: params[:user][:password])
+  @user = User.where(name: params[:user][:name])
+  session["user"] = @user[0][:id]
+  redirect '/'
 end
