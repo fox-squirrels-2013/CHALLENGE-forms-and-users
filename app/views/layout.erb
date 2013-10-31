@@ -16,9 +16,19 @@
     <div class="brand"><a href="/">User Authentication</a></div>
 
     <ul>
-      <!-- TODO: Implement Sign_Out. Render a delete form in a partial if there is a current user -->
+      <% if current_user %>
+        
+        <li><a href="/sessions/___">Sign Out</a></li>
+
+        <%= render "signout" %>
+        
+      <% else %>
+
         <li><a href="/sessions/new">Sign In</a></li>
         <li><a href="/users/new">Sign Up</a></li>
+
+      <% end %>
+      <!-- TODO: Implement Sign_Out. Render a delete form in a partial if there is a current user -->
       </ul>
 
   </nav>
