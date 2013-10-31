@@ -1,6 +1,4 @@
 get '/' do
-  # render home page
- #TODO: Show all users if user is signed in
   erb :index
 end
 
@@ -24,10 +22,10 @@ post '/sessions' do
   end
 end
 
-
-
 delete '/sessions/:id' do
-
+  flash[:success] = "You have been signed out. Goodbye."
+  session.delete(:user_id)
+  redirect '/'
   # sign-out  - use a partial with a form (no AJAX)
 end
 
