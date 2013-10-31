@@ -1,5 +1,5 @@
 <div class="container">
-  
+
   <% if session["user"] %>
     <% @all_members.each do |user| %>
       <p><%= user[:name] %></p>

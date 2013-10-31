@@ -33,7 +33,13 @@ end
 
 post '/users' do
   User.create(name: params[:user][:name], email: params[:user][:email], password: params[:user][:password])
-  @user = User.where(name: params[:user][:name])
-  session["user"] = @user[0][:id]
-  redirect '/'
+  @user = ['placeholder']
+  @user[0] = User.where(name: params[:user][:name])
+  unless @user = []
+    session["user"] = @user[0][:id]
+   redirect '/'
+  else
+    flash[:error] = User.flash_presence_validation_error
+    # redirect '/users/new'
+  end
 end
