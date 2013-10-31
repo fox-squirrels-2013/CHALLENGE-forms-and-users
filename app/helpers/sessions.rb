@@ -8,5 +8,20 @@ helpers do
     User.find(session[:user_id])
   end
 
+  def get_user_from(data)
+    user = User.where(:email => data[:email]).first
+    session[:user_id] = user.id
+    user
+  end
+
+  def create_user_from(data)
+    user = User.create data
+    session[:user_id] = user.id
+    user
+  end
+
+  def user_is_authenticated(data)
+    current_user.password == data[:password]
+  end
 end
 

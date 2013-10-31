@@ -12,10 +12,18 @@ get '/sessions/new' do
 end
 
 post '/sessions' do
-
-  # sign-in
+  user = get_user_from(params[:user])
+  
+  if user
+    if user_is_authenticated(params[:user])
+      redirect '/'
+    else
+      # bad password path
+    end
+  else
+    # user not found path
+  end
 end
-
 
 
 delete '/sessions/:id' do
@@ -32,8 +40,7 @@ get '/users/new' do
 end
 
 post '/users' do
-  user = User.create params[:user]
-  session[:user_id] = user.id
+  user = create_user_from(params[:user])
   # sign-up a new user
   "welcome new user: #{current_user.name}!"
 end
