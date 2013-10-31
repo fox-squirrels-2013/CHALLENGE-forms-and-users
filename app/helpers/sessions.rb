@@ -5,7 +5,7 @@ helpers do
   # current_user.email
   def current_user
     # TODO: return the current user if there is a user signed in.
-    User.find(session[:user_id])
+    User.find_by_id(session[:user_id])
   end
 
   def get_user_from(data)
