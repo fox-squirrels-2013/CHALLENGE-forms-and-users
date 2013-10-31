@@ -26,6 +26,7 @@ post '/sessions' do
   end
 end
 
+# delete '/sessions/1' do
 delete '/sessions/:id' do
 
   # sign-out  - use a partial with a form (no AJAX)

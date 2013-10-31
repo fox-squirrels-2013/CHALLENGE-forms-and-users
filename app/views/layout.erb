@@ -18,10 +18,9 @@
     <ul>
       <% if current_user %>
         
-        <li><a href="/sessions/___">Sign Out</a></li>
+        <form action="/sessions/<%= current_user.id %>"></form>
+        <%#= render "signout" %>  
 
-        <%= render "signout" %>
-        
       <% else %>
 
         <li><a href="/sessions/new">Sign In</a></li>
