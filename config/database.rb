@@ -30,9 +30,10 @@ DB_NAME = db.path[1..-1]
 
 # hard-code user and pw for local developemnt
 
-if ENV['RACK_ENV'] == "development"
+if ENV['RACK_ENV'] == "development" || ENV['RACK_ENV'].nil?
   db.user, db.password = 'postgres', 'postgres'
 end
+
 
 # Note:
 #   Sinatra::Application.environment is set to the value of ENV['RACK_ENV']

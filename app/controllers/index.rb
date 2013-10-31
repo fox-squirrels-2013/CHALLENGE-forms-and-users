@@ -48,3 +48,8 @@ post '/users' do
   session[:user_id] = u.id
   redirect '/'
 end
+
+get '/logout' do
+  session.clear
+  redirect '/'
+end
