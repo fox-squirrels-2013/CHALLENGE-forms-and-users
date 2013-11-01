@@ -45,7 +45,8 @@ get '/users/new' do
 end
 
 post '/users' do
-new_user = User.create(params.fetch(:user))
+p params
+new_user = User.create(params.fetch("user"))
 p session[:user_id] = new_user.id
 # p "Nothing to see here"
   # sign-up a new user
