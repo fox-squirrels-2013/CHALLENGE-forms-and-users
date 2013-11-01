@@ -1,0 +1,7 @@
+  <p>Below are your fellow dudes:</p>
+  <% @users.each do |user| %>
+    <p><%= user.id %>. user: <%= user.name %> -- pw: <%= user.password %></p>
+  <% end %>
+
+
+  <%= yield %>
