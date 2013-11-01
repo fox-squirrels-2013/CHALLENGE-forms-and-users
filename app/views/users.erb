@@ -1,10 +1,7 @@
 <div class="container">
-  <p>Welcommen</p>
+
   <%# TODO: 
   1. If user is not signed in - display "Welcome".
   2. If user is signed in then  display all users %>
-  <p><% @users.each do |member| %>
-    <%= member.name %> <br />
-    <% end %>
-  </p>
+  <p><%= session[:name] %> I like users they are greatttt!</p>
 </div>
