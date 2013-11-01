@@ -3,7 +3,9 @@ set(:sess) do |role|
 end
 
 get '/' do
-  session["user"] ||= nil
+  # session[:user_id] ||= nil
+  @users = User.all
+
   # render home page
  #TODO: Show all users if user is signed in
   erb :index
@@ -17,7 +19,13 @@ get '/sessions/new' do
 end
 
 post '/sessions' do
+  user = User.find_by_email(params[:user][:email])
+  if user && user.password == params[:user][:password]
+    session[:user_id] = user.id
+    redirect '/'
+  end
 
+  erb :sign_in
   # sign-in
 end
 
@@ -37,10 +45,8 @@ get '/users/new' do
 end
 
 post '/users' do
-current_user = User.create(name: params.fetch("user").fetch("name"),
-            email: params.fetch("user").fetch("email"), 
-            password: params.fetch("user").fetch("password") )
-p session[:id] = current_user.id
+new_user = User.create(params.fetch(:user),
+p session[:user_id] = current_user.id
 p session[:name]
 # p "Nothing to see here"
   # sign-up a new user
