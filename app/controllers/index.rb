@@ -1,6 +1,6 @@
 get '/' do
   # render home page
- #TODO: Show all users if user is signed in
+  #TODO: Show all users if user is signed in
   erb :index
 end
 
@@ -12,14 +12,24 @@ get '/sessions/new' do
 end
 
 post '/sessions' do
+  # params[:user][:email]
+  p params[:user][:password]
+  p user = User.where(name: "Dom")
+  p user.take!
 
-  # sign-in
+  # if params[:user][:password]==User.where(name: "Dom").password.take
+  #   redirect '/'
+  # else
+  #   redirect '/sessions'
+  # end
 end
 
+# params[:user] => {}[:email] => email@
 
+# 3.2 find_by_email params[:user][:email]
+# 4.0 find_by email: params[:user][:email]
 
 delete '/sessions/:id' do
-
   # sign-out  - use a partial with a form (no AJAX)
 end
 
@@ -32,6 +42,10 @@ get '/users/new' do
 end
 
 post '/users' do
-
+  user = User.create(params[:user])
+  session[:user_id] = user.id
+  redirect '/sessions/new'
   # sign-up a new user
 end
+
+# hrgbkjw
